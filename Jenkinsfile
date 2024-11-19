@@ -4,22 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            	script {
-            		git clone ${GIT_URL} ${WORKSPACE}
-            		cd ${WORKSPACE} && docker build -t ${IMAGE_NAME} .
-            	}
+    		sh 'git clone ${GIT_URL} ${WORKSPACE}'
+    		sh 'cd ${WORKSPACE} && docker build -t ${IMAGE_NAME} .'
             }
         }
         stage('Push') {
-            steps {
-            	script {
-            		docker tag ${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}
-            		//docker push ${DOCKER_USERNAME}/${IMAGE_NAME}
-            		docker push ${DOCKER_USERNAME}/${IMAGE_NAME}
-            	}
-                //sh 'docker tag ${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}'
-                //sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}'
-            }
+		sh 'docker tag ${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}'
+		//docker push ${DOCKER_USERNAME}/${IMAGE_NAME}
+		sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}'
         }
     }
 }
