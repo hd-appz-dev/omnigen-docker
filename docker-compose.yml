@@ -1,13 +1,9 @@
 services:
   comfyui:
-    image: daguerredevops/omnigen:latest
-    container_name: omnigen-testhd
-    #environment:
-    #  - NVIDIA_VISIBLE_DEVICES=all
-    #  - SERVE_API_LOCALLY=true
+    image: hdappzdev/omnigen-docker:latest
+    container_name: omnigen-docker-container
     ports:
       - "8222:22"
     runtime: nvidia
     volumes:
-      #- ./data/comfyui/output:/comfyui/output
       - ./output:/omnigen/outputs
