@@ -9,9 +9,11 @@ pipeline {
             }
         }
         stage('Push') {
-		sh 'docker tag ${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}'
-		//docker push ${DOCKER_USERNAME}/${IMAGE_NAME}
-		sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}'
+        	 steps {
+			sh 'docker tag ${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}'
+			//docker push ${DOCKER_USERNAME}/${IMAGE_NAME}
+			sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}'
+		}
         }
     }
 }
